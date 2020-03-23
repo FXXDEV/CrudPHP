@@ -1,0 +1,26 @@
+{
+    "name": "fxxdev/CrudPHP",
+    "description": "Php basic crud project",
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Andre Robert",
+          "email": "fxxdev@outlook.com",
+          "role": "Dev"
+        }
+      ],
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+        
+    },
+    "config":{
+     "vendor-dir": "vendor"
+    },
+    "require": {
+        "php": ">7.2",
+        "coffeecode/datalayer": "^1.1"       
+    }
+}
