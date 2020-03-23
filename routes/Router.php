@@ -6,8 +6,7 @@ use CoffeeCode\Router\Router;
 
 define("BASE", "http://localhost:8080/");
 $router = new Router(BASE);
-//http://localhost:8080/customer
-/**
+/*
  * routes
  * The controller must be in the namespace Test\Controller
  * this produces routes for route, route/$id, route/{$id}/profile, etc.
@@ -17,10 +16,7 @@ $router->get("/customer", "CustomerController:show");
 $router->post("/customer", "CustomerController:store");
 $router->put("/customer/{id}", "CustomerController:update");
 $router->delete("/customer/{id}", "CustomerController:destroy");
-// $router->post("/route/{id}", "Controller:method");
-// $router->put("/route/{id}/profile", "Controller:method");
-// $router->patch("/route/{id}/profile/{photo}", "Controller:method");
-// $router->delete("/route/{id}", "Controller:method");
+
 
 
 /**
