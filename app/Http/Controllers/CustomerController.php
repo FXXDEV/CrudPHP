@@ -30,7 +30,7 @@ class CustomerController {
 
     public function show(){
 
-        
+        echo '<h1>aaa</h1>';
     }
 
     public function home(){
@@ -38,7 +38,7 @@ class CustomerController {
     }
 
 
-    public function data($request){
+    public function error($request){
         $response = 'Error'.$request['errcode'];
         return $response;
 
