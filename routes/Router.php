@@ -9,13 +9,13 @@ define("BASE", "https://www.localhost/CrudPHP/");
 $router = new Router(BASE);
 /*
  * routes
- * The controller must be in the namespace Test\Controller
+ * The controller must be in the namespace App\Httpd\Controller
  * this produces routes for route, route/$id, route/{$id}/profile, etc.
  */
 $router->group(null)->namespace("App\Http\Controllers");
 $router->get("/customer", "CustomerController:show");
 $router->post("/customer", "CustomerController:store");
-$router->put("/customer/{id}", "CustomerController:update");
+$router->post("/customer/{id}", "CustomerController:update");
 $router->delete("/customer/{id}", "CustomerController:destroy");
 
 
@@ -28,7 +28,7 @@ $router->group("error");
 $router->get("/{errcode}", "CustomerController:error");
 
 /**
- * This method executes the routes
+ * Execute the routes
  */
 $router->dispatch();
 

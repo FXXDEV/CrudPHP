@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS customers (
   email varchar(50) NOT NULL,
   cpf char(11) NOT NULL,
   phone char(13) DEFAULT NULL
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
 );
 
  

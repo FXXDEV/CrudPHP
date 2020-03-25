@@ -15,11 +15,11 @@ class Customer extends DataLayer
      */
     public function __construct()
     {
-        parent::__construct("customer", [
-            "name",
-            "email",
-            "cpf",
-            "phone",
+        parent::__construct("customers", [
+            "name",//required field
+            "email",//required field
+            "cpf",//required field
+            //"phone" Not required field
         ]);
     }
 }
