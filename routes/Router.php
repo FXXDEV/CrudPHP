@@ -5,12 +5,11 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use CoffeeCode\Router\Router;
 
-define("BASE", "https://www.localhost/CrudPHP/");
-$router = new Router(BASE);
+$router = new Router(ROOT);
 /*
  * routes
  * The controller must be in the namespace App\Httpd\Controller
- * this produces routes for route, route/$id, route/{$id}/profile, etc.
+ * this produces routes for route, route/$id, route/{$id}/customer, etc.
  */
 $router->group(null)->namespace("App\Http\Controllers");
 $router->get("/customer", "CustomerController:show");

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Customer;
+use App\Models\Log;
 use DateTime;
+
 
 class CustomerController {
 
@@ -15,9 +17,30 @@ class CustomerController {
         array_key_exists("phone",$request) ? ($request["phone"]) : ($request["phone"] = null);
 
         return $request;
-        
+
     }
     
+
+    private function storeLogs($type, $msg, $request){
+        $log = new Log;
+        $dt = new DateTime();
+        $prepare_message = '['.$dt->format('d/m/Y H:m:s').'] '.$type.' '.$msg;
+        
+        if($request){
+            ($request->name) ? ($log->name = $request->name) : ($log->name = null);
+            ($request->email) ? ($log->email = $request->email) : ($log->email = null);
+            ($request->cpf) ? ($log->cpf = $request->cpf) : ($log->cpf = null);
+            ($request->phone) ? ($log->phone = $request->phone) : ($log->phone = null);
+        }
+
+        $log->log_message = $prepare_message;
+        
+        if(!$log->save()){
+            $log->fail()->getMessage();
+        }
+        
+    }
+
     public function store($request){    
         
         $request = $this->validateIndex($request);
@@ -29,9 +52,11 @@ class CustomerController {
         
         if($customer->save()){
             $response = 'Successfully Stored!';
+            $this->storeLogs('STORED',$response, $customer);
             var_dump($response);
         }else{
             $response  = $customer->fail()->getMessage();
+            $this->storeLogs('NOT STORED - ERROR',$response, null);
             var_dump($response);
         }
     }
@@ -48,9 +73,12 @@ class CustomerController {
 
         if($customer->save()){
             $response = 'Successfully updated!';
+            $this->storeLogs('UPDATED ',$response, $customer);
             var_dump($response);
         }else{
-            var_dump($customer->fail()->getMessage());
+            $response = $customer->fail()->getMessage();
+            $this->storeLogs('NOT UPDATED - ERROR',$response, null);
+            var_dump($response);
         }
 
     }
@@ -58,14 +86,17 @@ class CustomerController {
     public function destroy($request){
         
         $customer = (new Customer())->findById($request["id"]);
-
+    
         if($customer->destroy()){
             $response = 'Successfully deleted!';
+            $this->storeLogs('DELETED',$response, $customer);
             var_dump($response);
         }else{
-            var_dump($customer->fail()->getMessage());
+            $response = $customer->fail()->getMesssage();
+            $this->storeLogs('NOT DELETED - ERROR',$response, null);
+            var_dump($response);
         }
-
+        
     }
 
     public function show(){
