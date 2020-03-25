@@ -101,6 +101,7 @@ class CustomerController {
 
     public function show(){
 
+        
         $customer = new Customer();
         $list = $customer->find()->fetch(true);        
         if($list){
